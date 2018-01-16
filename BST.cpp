@@ -81,6 +81,33 @@ class Tree{
 			else addNodeToTree(root,newNode);
 		}
 		
+		void printInOrder(TreeNode* curr){
+			if(curr == NULL){
+				return;
+			}
+			printInOrder(curr->getLeft());
+			cout<<(curr->getVal())<<endl;
+			printInOrder(curr->getRight());
+ 		}
+
+ 		void printPostOrder(TreeNode* curr){
+			if(curr == NULL){
+				return;
+			}
+			printPostOrder(curr->getLeft());
+			printPostOrder(curr->getRight());
+			cout<<(curr->getVal())<<endl;
+ 		}
+
+ 		void printPreOrder(TreeNode* curr){
+			if(curr == NULL){
+				return;
+			}
+			cout<<(curr->getVal())<<endl;
+			printPreOrder(curr->getLeft());
+			printPreOrder(curr->getRight());
+ 		}
+		
 };
 
 
@@ -89,13 +116,21 @@ int main(){
 	TreeNode* tempRoot;
 	int choice,value;
 	while(1){
-		cout<<"\n1.Insert element to the tree\n6.Exit\nEnter your choice:";
+		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n6.Exit\nEnter your choice:";
 		cin>>choice;
 		switch(choice){
 			case 1:
 				cout<<"Value to be inserted:";
 				cin>>value;
 				t->addNode(value);
+				break;
+			case 2:
+				cout<<"\nInorder: "<<endl;
+				t->printInOrder(t->getRoot());
+				cout<<"\nPreorder: "<<endl;
+				t->printPreOrder(t->getRoot());
+				cout<<"\nPostorder: "<<endl;
+				t->printPostOrder(t->getRoot());
 				break;
 			case 6:
 				exit(0);
