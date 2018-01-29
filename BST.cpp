@@ -134,6 +134,46 @@ class Tree{
  			return (curr->getLeft() != NULL ^ curr->getRight() != NULL) + OneChild(curr->getLeft()) + OneChild(curr->getRight());
  		}
  		
+ 		int SumTree(TreeNode* curr){
+ 			if(curr == NULL) return 0;
+ 			return curr->getVal() + SumTree(curr->getLeft()) + SumTree(curr->getRight());
+  		}
+ 		
+ 		bool searchTree(TreeNode* curr, int val){
+ 			if(curr ==NULL) return 0;
+			if(val == curr->getVal()) return 1; 			
+			if(val > curr->getVal()) return searchTree(curr->getRight(),val);
+			return searchTree(curr->getLeft(),val);
+ 		}
+ 		
+ 		void invertTree(TreeNode* curr){
+ 			TreeNode* temp;
+ 			if(curr==NULL)return;
+ 			invertTree(curr->getLeft());
+ 			invertTree(curr->getRight());
+ 			temp = curr->getLeft();
+ 			curr->setLeft(curr->getRight());
+ 			curr->setRight(temp);
+ 		}
+
+ 		
+ 		void minNode(TreeNode* curr){
+ 			while(curr->getLeft() != NULL){
+ 				curr = curr->getLeft();
+ 			}
+ 		}
+ 		
+ 		void deleteNode(TreeNode* curr, int val){
+ 			if(curr==NULL) return;
+ 			if(val == curr->getVal()){
+ 				
+ 			}
+ 			else if(val < curr->getVal()){
+ 				deleteNode(curr->getLeft(),val);
+ 			} else {
+ 				deleteNode(curr->getRight(),val);
+ 			}
+ 		}
  		
  		
 };
@@ -144,7 +184,7 @@ int main(){
 	TreeNode* tempRoot;
 	int choice,value;
 	while(1){
-		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n3.Delete\n4.Height of tree\n5.Size of tree\n6.Leaf nodes\n7.Two Child nodes\n8.One child nodes\n14.Exit\nEnter your choice:";
+		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n3.Delete\n4.Height of tree\n5.Size of tree\n6.Leaf nodes\n7.Two Child nodes\n8.One child nodes\n9.Sum of tree\n10.Search node in tree\n14.Exit\n\nEnter your choice:";
 		cin>>choice;
 		switch(choice){
 			case 1:
@@ -179,6 +219,17 @@ int main(){
 			case 8:
 				cout<<"\nNumber of one child nodes"<<endl;
 				cout<<t->OneChild(t->getRoot())<<endl;
+				break;
+			case 9:
+				cout<<"\nSum of tree is:"<<endl;
+				cout<<t->SumTree(t->getRoot())<<endl;
+				break;
+			case 10:
+				cout<<"\nEnter value to be searched:"<<endl;
+				cin>>value;
+				if(t->searchTree(t->getRoot(),value)) cout<<"Value available"<<endl;
+				else cout<<"Value not available"<<endl;
+				break;
 			case 14:
 				exit(0);
 				break;
