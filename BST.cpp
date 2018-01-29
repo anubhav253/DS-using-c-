@@ -155,26 +155,6 @@ class Tree{
  			curr->setLeft(curr->getRight());
  			curr->setRight(temp);
  		}
-
- 		
- 		void minNode(TreeNode* curr){
- 			while(curr->getLeft() != NULL){
- 				curr = curr->getLeft();
- 			}
- 		}
- 		
- 		void deleteNode(TreeNode* curr, int val){
- 			if(curr==NULL) return;
- 			if(val == curr->getVal()){
- 				
- 			}
- 			else if(val < curr->getVal()){
- 				deleteNode(curr->getLeft(),val);
- 			} else {
- 				deleteNode(curr->getRight(),val);
- 			}
- 		}
- 		
  		
 };
 
@@ -184,11 +164,11 @@ int main(){
 	TreeNode* tempRoot;
 	int choice,value;
 	while(1){
-		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n3.Delete\n4.Height of tree\n5.Size of tree\n6.Leaf nodes\n7.Two Child nodes\n8.One child nodes\n9.Sum of tree\n10.Search node in tree\n14.Exit\n\nEnter your choice:";
+		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n3.Delete\n4.Height of tree\n5.Size of tree\n6.Leaf nodes\n7.Two Child nodes\n8.One child nodes\n9.Sum of tree\n10.Search node in tree\n11.Invert the tree\n14.Exit\n\nEnter your choice:";
 		cin>>choice;
 		switch(choice){
 			case 1:
-				cout<<"Value to be inserted:";
+				cout<<"\nValue to be inserted:";
 				cin>>value;
 				t->addNode(value);
 				break;
@@ -225,10 +205,17 @@ int main(){
 				cout<<t->SumTree(t->getRoot())<<endl;
 				break;
 			case 10:
-				cout<<"\nEnter value to be searched:"<<endl;
+				cout<<"\nEnter value to be searched:-";
 				cin>>value;
 				if(t->searchTree(t->getRoot(),value)) cout<<"Value available"<<endl;
 				else cout<<"Value not available"<<endl;
+				break;
+			case 11:
+				cout<<"\nTree before\nInorder: "<<endl;
+				t->printInOrder(t->getRoot());
+				t->invertTree(t->getRoot());
+				cout<<"\nTree inverted\nInorder: "<<endl;
+				t->printInOrder(t->getRoot());
 				break;
 			case 14:
 				exit(0);
