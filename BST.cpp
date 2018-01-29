@@ -1,5 +1,4 @@
-#include<iostream>
-#include<stdlib.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 class TreeNode{
@@ -81,6 +80,7 @@ class Tree{
 			else addNodeToTree(root,newNode);
 		}
 		
+		
 		void printInOrder(TreeNode* curr){
 			if(curr == NULL){
 				return;
@@ -107,7 +107,73 @@ class Tree{
 			printPreOrder(curr->getLeft());
 			printPreOrder(curr->getRight());
  		}
-		
+ 		
+ 		int heightTree(TreeNode* curr){
+ 			if(curr==NULL)return 0;
+ 			return 1 + max(heightTree(curr->getLeft()) , heightTree(curr->getRight()));
+ 		}
+ 		
+ 		int sizeTree(TreeNode* curr){
+ 			if(curr==NULL) return 0;
+ 			return 1 + sizeTree(curr->getLeft()) + sizeTree(curr->getRight());
+ 		}
+ 		
+ 		int leafNode(TreeNode* curr){
+ 			if(curr == NULL) return 0;
+ 			if(curr->getLeft() == NULL && curr->getRight() == NULL) return 1;
+ 			return leafNode(curr->getLeft()) + leafNode(curr->getRight());
+ 		}
+ 		
+ 		int TwoChild(TreeNode* curr){
+ 			if(curr == NULL) return 0;
+			return (curr->getLeft() != NULL && curr->getRight() != NULL) + TwoChild(curr->getLeft()) + TwoChild(curr->getRight());
+ 		}
+ 		
+ 		int OneChild(TreeNode* curr){
+ 			if(curr == NULL) return 0;
+ 			return (curr->getLeft() != NULL ^ curr->getRight() != NULL) + OneChild(curr->getLeft()) + OneChild(curr->getRight());
+ 		}
+ 		
+ 		int SumTree(TreeNode* curr){
+ 			if(curr == NULL) return 0;
+ 			return curr->getVal() + SumTree(curr->getLeft()) + SumTree(curr->getRight());
+  		}
+ 		
+ 		bool searchTree(TreeNode* curr, int val){
+ 			if(curr ==NULL) return 0;
+			if(val == curr->getVal()) return 1; 			
+			if(val > curr->getVal()) return searchTree(curr->getRight(),val);
+			return searchTree(curr->getLeft(),val);
+ 		}
+ 		
+ 		void invertTree(TreeNode* curr){
+ 			TreeNode* temp;
+ 			if(curr==NULL)return;
+ 			invertTree(curr->getLeft());
+ 			invertTree(curr->getRight());
+ 			temp = curr->getLeft();
+ 			curr->setLeft(curr->getRight());
+ 			curr->setRight(temp);
+ 		}
+
+ 		
+ 		void minNode(TreeNode* curr){
+ 			while(curr->getLeft() != NULL){
+ 				curr = curr->getLeft();
+ 			}
+ 		}
+ 		
+ 		void deleteNode(TreeNode* curr, int val){
+ 			if(curr==NULL) return;
+ 			if(val == curr->getVal()){
+ 				
+ 			}
+ 			else if(val < curr->getVal()){
+ 				deleteNode(curr->getLeft(),val);
+ 			} else {
+ 				deleteNode(curr->getRight(),val);
+ 			}
+ 		}
 };
 
 
@@ -116,7 +182,7 @@ int main(){
 	TreeNode* tempRoot;
 	int choice,value;
 	while(1){
-		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n6.Exit\nEnter your choice:";
+		cout<<"\n1.Insert element to the tree\n2.Traverse the tree\n3.Delete\n6.Exit\nEnter your choice:";
 		cin>>choice;
 		switch(choice){
 			case 1:
