@@ -58,16 +58,31 @@ class linkedList{
 			}
 			cout<<"--------------"<<endl;
 		}
+		
+		
+		void addNodeEnd(Node* newNode){
+			if(head == NULL){
+				head = newNode;
+			}
+			else{
+				Node* temp = head;
+				while(temp->getNext() != NULL){
+					temp = temp->getNext();
+				}
+				temp->setNext(newNode);
+			}
+		}
 };
 
 
 int main(){
 	int n,val;
 	linkedList* ob = new linkedList();
+	Node* x;
 	while(1){
 		cout<<"\n1.Print list"<<endl;
 		cout<<"2.Add node at beginning"<<endl;
-		
+		cout<<"3.Add node at end"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -79,8 +94,14 @@ int main(){
 			case 2:
 				cout<<"\nNode value: "<<endl;
 				cin>>val;
-				Node* x = new Node(val);
+				x = new Node(val);
 				ob->addNodeBeg(x);
+				break;
+			case 3:
+				cout<<"\nNode value: "<<endl;
+				cin>>val;
+				x = new Node(val);
+				ob->addNodeEnd(x);
 				break;
 		}
 	}
