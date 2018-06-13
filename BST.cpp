@@ -156,6 +156,23 @@ class Tree{
  			curr->setRight(temp);
  		}
  		
+ 		void minNode(TreeNode* curr){
+ 			while(curr->getLeft() != NULL){
+ 				curr = curr->getLeft();
+ 			}
+ 		}
+ 		
+ 		void deleteNode(TreeNode* curr, int val){
+ 			if(curr==NULL) return;
+ 			if(val == curr->getVal()){
+ 				
+ 			}
+ 			else if(val < curr->getVal()){
+ 				deleteNode(curr->getLeft(),val);
+ 			} else {
+ 				deleteNode(curr->getRight(),val);
+ 			}
+ 		}
 };
 
 
