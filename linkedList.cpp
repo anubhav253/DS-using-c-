@@ -53,11 +53,18 @@ class linkedList{
 			Node* temp = head;
 			cout<<"--------------"<<endl;
 			while(temp != NULL){
-				cout<<temp->getVal()<<endl;
+				cout<<temp->getVal()<<" -> ";
 				temp = temp->getNext();
 			}
-			cout<<"--------------"<<endl;
+			cout<<"\n--------------"<<endl;
 		}
+		
+		void reversePrint(Node *head){
+			if(head==NULL) return;
+			reversePrint(head->getNext());
+			cout<<head->getVal()<<" -> ";
+		}
+		
 		
 		
 		void addNodeEnd(Node* newNode){
@@ -83,6 +90,7 @@ int main(){
 		cout<<"\n1.Print list"<<endl;
 		cout<<"2.Add node at beginning"<<endl;
 		cout<<"3.Add node at end"<<endl;
+		cout<<"4.Print reverse of linked list"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -102,6 +110,9 @@ int main(){
 				cin>>val;
 				x = new Node(val);
 				ob->addNodeEnd(x);
+				break;
+			case 4:
+				ob->reversePrint(ob->getHead());
 				break;
 		}
 	}
