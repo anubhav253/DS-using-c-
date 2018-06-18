@@ -65,7 +65,25 @@ class linkedList{
 			cout<<head->getVal()<<" -> ";
 		}
 		
+		void printListRec(Node *h){
+			if(h==NULL)return;
+			cout<<h->getVal()<<" -> ";
+			printListRec(h->getNext());
+		}
 		
+		Node* addAtEndRec(Node *h,Node* newNode ){
+			if(head == NULL)  head = newNode;
+			if(h==NULL) return newNode;
+			h->setNext(addAtEndRec(h->getNext(), newNode));
+		}
+		
+		void SumAllElementsRec(Node* h){
+			
+		}
+		
+		int searchElement(int n){
+			
+		}
 		
 		void addNodeEnd(Node* newNode){
 			if(head == NULL){
@@ -91,6 +109,7 @@ int main(){
 		cout<<"2.Add node at beginning"<<endl;
 		cout<<"3.Add node at end"<<endl;
 		cout<<"4.Print reverse of linked list"<<endl;
+		cout<<"5.Add mode at end using recursion"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -114,6 +133,14 @@ int main(){
 			case 4:
 				ob->reversePrint(ob->getHead());
 				break;
+			case 5:
+				cout<<"\nNode value: "<<endl;
+				cin>>val;
+				x = new Node(val);
+				ob->addAtEndRec(ob->getHead(), x);
+				break;
+			default:
+				return 0;
 		}
 	}
 	return 0;
