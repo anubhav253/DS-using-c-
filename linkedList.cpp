@@ -77,8 +77,9 @@ class linkedList{
 			h->setNext(addAtEndRec(h->getNext(), newNode));
 		}
 		
-		void SumAllElementsRec(Node* h){
-			
+		int SumAllElementsRec(Node* h){
+			if(h == NULL) return 0;
+			return h->getVal() + SumAllElementsRec(h->getNext());
 		}
 		
 		int searchElement(int n){
@@ -120,6 +121,7 @@ int main(){
 		cout<<"4.Print reverse of linked list"<<endl;
 		cout<<"5.Add mode at end using recursion"<<endl;
 		cout<<"6.Search value"<<endl;
+		cout<<"7.Sum of linked list"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -153,6 +155,10 @@ int main(){
 				cout<<"\nEnter value to search: "<<endl;
 				cin>>val;
 				ob->searchElement(val);
+				break;
+			case 7:
+				val=ob->SumAllElementsRec(ob->getHead());
+				cout<<"\nSum of list is: "<<val<<endl;
 				break;
 			default:
 				return 0;
