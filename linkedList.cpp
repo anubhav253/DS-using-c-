@@ -82,7 +82,16 @@ class linkedList{
 		}
 		
 		int searchElement(int n){
-			
+			Node* temp = head;
+			if(temp == NULL) cout<<"Linked list is empty."<<endl;
+			while(temp != NULL){
+				if(temp->getVal() == n){
+					cout<<"Value available in linked list."<<endl;
+					return 0;
+				}
+				temp = temp->getNext();
+			}
+			cout<<"Value not available in linked list"<<endl;
 		}
 		
 		void addNodeEnd(Node* newNode){
@@ -110,6 +119,7 @@ int main(){
 		cout<<"3.Add node at end"<<endl;
 		cout<<"4.Print reverse of linked list"<<endl;
 		cout<<"5.Add mode at end using recursion"<<endl;
+		cout<<"6.Search value"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -138,6 +148,11 @@ int main(){
 				cin>>val;
 				x = new Node(val);
 				ob->addAtEndRec(ob->getHead(), x);
+				break;
+			case 6:
+				cout<<"\nEnter value to search: "<<endl;
+				cin>>val;
+				ob->searchElement(val);
 				break;
 			default:
 				return 0;
