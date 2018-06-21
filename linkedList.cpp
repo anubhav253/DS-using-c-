@@ -1,4 +1,5 @@
 #include<iostream>
+#include <stdlib.h>
 using namespace std;
 
 class Node{
@@ -49,6 +50,44 @@ class linkedList{
 				head=newNode;
 			}
 		}
+		
+		void addNodePosi(Node* newNode, int p){
+			Node* temp1 = head;
+			Node* temp2 = head;
+			for(int i=1;i<=p;i++){
+				if(temp1 == NULL) break;
+				temp2 = temp1;
+				temp1 = temp1->getNext();
+			}
+			if(temp1 == NULL && temp2 == NULL){
+				head = newNode;
+			}
+			else if(temp1 == NULL && temp2 != NULL){
+				temp2->setNext(newNode);
+			}
+			else{
+				temp2->setNext(newNode);
+				newNode->setNext(temp1);
+			}
+		}
+		void Delete(int n){
+			Node* temp1 = head;
+			Node* temp2 = head;
+			for(int i=1;i<n;i++){
+				if(temp1 == NULL) break;
+				temp2 = temp1;
+				temp1 = temp1->getNext();
+			}
+			if(temp1 == NULL) return;
+			else if(n == 1){
+				head = temp1->getNext();
+				//free(temp1);
+			}
+			else{
+				temp2->setNext(temp1->getNext());
+			}
+		}
+		
 		void printList(){
 			Node* temp = head;
 			cout<<"--------------"<<endl;
@@ -111,7 +150,7 @@ class linkedList{
 
 
 int main(){
-	int n,val;
+	int n,val,p;
 	linkedList* ob = new linkedList();
 	Node* x;
 	while(1){
@@ -119,9 +158,11 @@ int main(){
 		cout<<"2.Add node at beginning"<<endl;
 		cout<<"3.Add node at end"<<endl;
 		cout<<"4.Print reverse of linked list"<<endl;
-		cout<<"5.Add mode at end using recursion"<<endl;
+		cout<<"5.Add node at end using recursion"<<endl;
 		cout<<"6.Search value"<<endl;
 		cout<<"7.Sum of linked list"<<endl;
+		cout<<"8.Add node at posotion"<<endl;
+		cout<<"9.Delete node at position"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -159,6 +200,19 @@ int main(){
 			case 7:
 				val=ob->SumAllElementsRec(ob->getHead());
 				cout<<"\nSum of list is: "<<val<<endl;
+				break;
+			case 8:
+				cout<<"\nNode value: "<<endl;
+				cin>>val;
+				cout<<"\nEnter position to enter: "<<endl;
+				cin>>p;
+				x = new Node(val);
+				ob->addNodePosi(x, p);
+				break;
+			case 9:
+				cout<<"\nEnter position to delete value: "<<endl;
+				cin>>p;
+				ob->Delete(p);
 				break;
 			default:
 				return 0;
