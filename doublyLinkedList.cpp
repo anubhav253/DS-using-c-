@@ -79,6 +79,20 @@ class doublyLinkedList{
 			}
 			cout<<"\n--------------"<<endl;
 		}
+		int searchList(int n){
+			Node* temp = head;
+			if(temp == NULL){
+				cout<<"\n List is empty"<<endl;
+			}
+			while(temp != NULL){
+				if(temp->getVal() == n){
+					cout<<"\nElement found"<<endl;
+					return 0;
+				}
+				temp->getNext();
+			}
+			cout<<"\nElement not found"<<endl;
+		}
 };
 
 int main(){
@@ -87,9 +101,10 @@ int main(){
 	Node* x;
 	
 	while(1){
-		cout<<"1.Print list"<<endl;
+		cout<<"\n1.Print list"<<endl;
 		cout<<"2.Add node at beginning"<<endl;
 		cout<<"3.Add node at end"<<endl;
+		cout<<"4.Search node in the list"<<endl;
 		cout<<"Enter your choice: ";
 		
 		cin>>n;
@@ -108,6 +123,12 @@ int main(){
 				cin>>val;
 				x = new Node(val);
 				ob->addNodeEnd(x);
+				break;
+				
+			case 4:
+				cout<<"\nEnter node value to search: ";
+				cin>>val;
+				ob->searchList(val);
 				break;
 			default:
 				return 0;
