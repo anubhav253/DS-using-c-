@@ -53,11 +53,22 @@ class doublyLinkedList{
 			if(head == NULL){
 				head = newNode;
 				return;
-				
 			}
 			head->setPrev(newNode);
 			newNode->setNext(head);
 			head=newNode;
+		}
+		void addNodeEnd(Node* newNode){
+			if(head == NULL){
+				head = newNode;
+				return;
+			}
+			Node* temp = head;
+			while(temp->getNext() != NULL){
+				temp = temp->getNext();
+			}
+			temp->setNext(newNode);
+			newNode->setPrev(temp);
 		}
 		void printList(){
 			Node *temp = head;
@@ -78,6 +89,7 @@ int main(){
 	while(1){
 		cout<<"1.Print list"<<endl;
 		cout<<"2.Add node at beginning"<<endl;
+		cout<<"3.Add node at end"<<endl;
 		cout<<"Enter your choice: ";
 		
 		cin>>n;
@@ -90,6 +102,12 @@ int main(){
 				cin>>val;
 				x = new Node(val);
 				ob->addNodeBeg(x);
+				break;
+			case 3:
+				cout<<"\nEnter node value: ";
+				cin>>val;
+				x = new Node(val);
+				ob->addNodeEnd(x);
 				break;
 			default:
 				return 0;
