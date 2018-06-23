@@ -1,5 +1,6 @@
 #include<iostream>
 #include<algorithm>
+#include<queue>
 
 using namespace std;
 
@@ -145,7 +146,16 @@ class Tree{
 		}
 		
 		void printLevelOrderTree(Node* curr){
-			
+			queue<Node *> q;
+			if(curr == NULL) return;
+			q.push(curr);
+			while(!q.empty()){
+				Node* node=q.front();
+				cout<<node->getVal()<<"->";
+				q.pop();
+				if(node->getLeft() != NULL) q.push(node->getLeft());
+				if(node->getRight() != NULL) q.push(node->getRight());
+			}
 		}
 };
 
@@ -164,6 +174,7 @@ int main(){
 		cout<<"8.Search node in tree"<<endl;
 		cout<<"9.Get leaf nodes"<<endl;
 		cout<<"10.Node with 1 child"<<endl;
+		cout<<"11.Print level order of tree"<<endl;
 		cout<<"\nEnter your choice: ";
 		cin>>ch;
 		
@@ -210,6 +221,11 @@ int main(){
 			case 10:
 				cout<<"\nNode with 1 child: "<<endl;
 				t->printAllNodewithOneChild(t->getRoot());
+				break;
+			case 11:
+				cout<<"Level order print of tree:"<<endl;
+				t->printLevelOrderTree(t->getRoot());
+				cout<<"\n"<<endl;
 				break;
 			default:
 				return 0;
