@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 
 using namespace std;
 
@@ -93,9 +94,24 @@ class Tree{
 			if(curr == NULL) return;
 			InOrderPrint(curr->getLeft());
 			InOrderPrint(curr->getRight());
-			cout<<curr->getVal()<<endl;
-			
+			cout<<curr->getVal()<<endl;	
 		}
+		
+		int heightOfTree(Node* curr){
+			if(curr == NULL) return 0;
+			int leftHeight = heightOfTree(curr->getLeft());
+			int rightHeight = heightOfTree(curr->getRight());
+			return (max(leftHeight, rightHeight) + 1);
+		}
+		
+		int minHeightOfTree(Node* curr){
+			if(curr == NULL) return 0;
+			int leftHeight = heightOfTree(curr->getLeft());
+			int rightHeight = heightOfTree(curr->getRight());
+			return (min(leftHeight, rightHeight) + 1);
+		}
+		
+		
 };
 
 int main(){
@@ -107,6 +123,8 @@ int main(){
 		cout<<"2.Print tree in Inorder"<<endl;
 		cout<<"3.Print tree in Preorder"<<endl;
 		cout<<"4.Print tree in Postorder"<<endl;
+		cout<<"5.Height of tree"<<endl;
+		cout<<"6.Minimum height of tree"<<endl;
 		cout<<"\nEnter your choice: ";
 		cin>>ch;
 		
@@ -127,6 +145,14 @@ int main(){
 			case 4:
 				cout<<"\nPrinting tree in postorder: "<<endl;
 				t->PostOrderPrint(t->getRoot());
+				break;
+			case 5:
+				val = t->heightOfTree(t->getRoot());
+				cout<<"\nHeight of tree is "<<val<<endl;
+				break;
+			case 6:
+				val = t->minHeightOfTree(t->getRoot());
+				cout<<"\nMinimum height of tree is "<<val<<endl;
 				break;
 			default:
 				return 0;
