@@ -129,7 +129,7 @@ class linkedList{
 			Node* temp = head;
 			if(temp == NULL) {
 				cout<<"\nLinked list is empty."<<endl;
-				return;
+				return 0;
 			}
 			while(temp != NULL){
 				if(temp->getVal() == n){
@@ -163,6 +163,25 @@ class linkedList{
 			}
 			cout<<"\nMiddle element of the list is  "<<slow_ptr->getVal()<<endl;
 		}
+		
+		void findNthFromEnd(int n){
+			if(head == NULL) {
+				cout<<"\nLinked list is empty."<<endl;
+				return;
+			}
+			Node* main_ptr = head;
+			Node* temp_ptr = head;
+			int c=0;
+			while(c<n){
+				temp_ptr = temp_ptr->getNext();
+				c++;
+			}
+			while(temp_ptr != NULL){
+				main_ptr = main_ptr->getNext();
+				temp_ptr = temp_ptr->getNext();
+			}
+			cout<<"\nValue at "<<n<<" position from end is "<<main_ptr->getVal()<<endl;
+		}
 };
 
 
@@ -181,6 +200,7 @@ int main(){
 		cout<<"8.Add node at posotion"<<endl;
 		cout<<"9.Delete node at position"<<endl;
 		cout<<"10.Middle element of the list"<<endl;
+		cout<<"11.Find value at Nth position from the end"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -234,6 +254,11 @@ int main(){
 				break;
 			case 10:
 				ob->findMiddleElement();
+				break;
+			case 11:
+				cout<<"\nEnter the position from end: ";
+				cin>>val;
+				ob->findNthFromEnd(val);
 				break;
 			default:
 				return 0;
