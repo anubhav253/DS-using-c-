@@ -90,6 +90,10 @@ class linkedList{
 		
 		void printList(){
 			Node* temp = head;
+			if(temp == NULL){
+				cout<<"\nList is empty."<<endl;
+				return;
+			}
 			cout<<"--------------"<<endl;
 			while(temp != NULL){
 				cout<<temp->getVal()<<" -> ";
@@ -123,7 +127,10 @@ class linkedList{
 		
 		int searchElement(int n){
 			Node* temp = head;
-			if(temp == NULL) cout<<"Linked list is empty."<<endl;
+			if(temp == NULL) {
+				cout<<"\nLinked list is empty."<<endl;
+				return;
+			}
 			while(temp != NULL){
 				if(temp->getVal() == n){
 					cout<<"Value available in linked list."<<endl;
@@ -146,6 +153,16 @@ class linkedList{
 				temp->setNext(newNode);
 			}
 		}
+		void findMiddleElement(){
+			Node* fast_ptr = head;
+			Node* slow_ptr = head;
+			if(head == NULL) return;
+			while(fast_ptr != NULL && fast_ptr->getNext() != NULL){
+				fast_ptr = fast_ptr->getNext()->getNext();
+				slow_ptr = slow_ptr->getNext();
+			}
+			cout<<"\nMiddle element of the list is  "<<slow_ptr->getVal()<<endl;
+		}
 };
 
 
@@ -163,6 +180,7 @@ int main(){
 		cout<<"7.Sum of linked list"<<endl;
 		cout<<"8.Add node at posotion"<<endl;
 		cout<<"9.Delete node at position"<<endl;
+		cout<<"10.Middle element of the list"<<endl;
 		cout<<"Choose your option: ";
 		
 		
@@ -213,6 +231,9 @@ int main(){
 				cout<<"\nEnter position to delete value: "<<endl;
 				cin>>p;
 				ob->Delete(p);
+				break;
+			case 10:
+				ob->findMiddleElement();
 				break;
 			default:
 				return 0;
