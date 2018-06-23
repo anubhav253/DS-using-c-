@@ -111,6 +111,20 @@ class Tree{
 			return (min(leftHeight, rightHeight) + 1);
 		}
 		
+		int diaMeterOfTree(Node* curr){
+			if(curr == NULL) return 0;
+			int leftHeight = heightOfTree(curr->getLeft());
+			int rightHeight = heightOfTree(curr->getRight());
+			return ((leftHeight + rightHeight) + 1);
+		}
+		
+		bool searchValue(Node* curr, int n){
+			if(curr == NULL) return 0;
+			if(curr->getVal() == n) return 1;
+			if(curr->getVal() > n) return searchValue(curr->getLeft(), n);
+			return searchValue(curr->getRight(), n);
+		}
+		
 		
 };
 
@@ -125,6 +139,8 @@ int main(){
 		cout<<"4.Print tree in Postorder"<<endl;
 		cout<<"5.Height of tree"<<endl;
 		cout<<"6.Minimum height of tree"<<endl;
+		cout<<"7.Diameter of tree"<<endl;
+		cout<<"8.Search node in tree"<<endl;
 		cout<<"\nEnter your choice: ";
 		cin>>ch;
 		
@@ -153,6 +169,16 @@ int main(){
 			case 6:
 				val = t->minHeightOfTree(t->getRoot());
 				cout<<"\nMinimum height of tree is "<<val<<endl;
+				break;
+			case 7:
+				val = t->diaMeterOfTree(t->getRoot());
+				cout<<"\nDiameter of tree is "<<val<<endl;
+				break;
+			case 8:
+				cout<<"\nEnter value to be searched: ";
+				cin>>val;
+				if(t->searchValue(t->getRoot(),val)) cout<<"\nValue available"<<endl;
+				else cout<<"\nValue not available"<<endl;
 				break;
 			default:
 				return 0;
