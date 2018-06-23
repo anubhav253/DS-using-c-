@@ -125,7 +125,28 @@ class Tree{
 			return searchValue(curr->getRight(), n);
 		}
 		
+		void printAllLeafNode(Node* curr){
+			if(curr == NULL) return;
+			if(curr->getLeft() == NULL && curr->getRight() == NULL) cout<<curr->getVal()<<endl;
+			printAllLeafNode(curr->getLeft());
+			printAllLeafNode(curr->getRight());
+			
+		}
 		
+		
+		void printAllNodewithOneChild(Node* curr){
+			if(curr == NULL) return;
+			if(curr->getLeft() == NULL && curr->getRight() == NULL) return;
+			printAllNodewithOneChild(curr->getLeft());
+			printAllNodewithOneChild(curr->getRight());
+			if((curr->getLeft() == NULL && curr->getRight() != NULL) || (curr->getLeft() != NULL && curr->getRight() == NULL))
+				cout<<curr->getVal()<<endl;
+			
+		}
+		
+		void printLevelOrderTree(Node* curr){
+			
+		}
 };
 
 int main(){
@@ -141,6 +162,8 @@ int main(){
 		cout<<"6.Minimum height of tree"<<endl;
 		cout<<"7.Diameter of tree"<<endl;
 		cout<<"8.Search node in tree"<<endl;
+		cout<<"9.Get leaf nodes"<<endl;
+		cout<<"10.Node with 1 child"<<endl;
 		cout<<"\nEnter your choice: ";
 		cin>>ch;
 		
@@ -179,6 +202,14 @@ int main(){
 				cin>>val;
 				if(t->searchValue(t->getRoot(),val)) cout<<"\nValue available"<<endl;
 				else cout<<"\nValue not available"<<endl;
+				break;
+			case 9:
+				cout<<"\nLeaf nodes: "<<endl;
+				t->printAllLeafNode(t->getRoot());
+				break;
+			case 10:
+				cout<<"\nNode with 1 child: "<<endl;
+				t->printAllNodewithOneChild(t->getRoot());
 				break;
 			default:
 				return 0;
